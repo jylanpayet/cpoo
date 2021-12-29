@@ -11,14 +11,13 @@ import java.io.IOException;
 public class Julia {
     private final int maxIt, radius;
     private final Complex constant;
-    private final double xMax, xMin, yMax, yMin, zoom, step;
+    private final double xMax, xMin, yMax, yMin, step;
 
     public Julia(JuliaBuilder builder) {
         this.maxIt = builder.maxIt;
         this.radius = builder.radius;
         this.constant = builder.constant;
         this.step = builder.step;
-        this.zoom = builder.zoom;
         this.xMax = builder.xMax;
         this.xMin = builder.xMin;
         this.yMax = builder.yMax;
@@ -30,7 +29,7 @@ public class Julia {
         private int maxIt;
         private int radius;
         private Complex constant;
-        private double xMax, xMin, yMax, yMin, zoom, step;
+        private double xMax, xMin, yMax, yMin, step;
 
         public JuliaBuilder setMaxIt(int maxIt) {
             this.maxIt = maxIt;
@@ -67,11 +66,6 @@ public class Julia {
             return this;
         }
 
-        public JuliaBuilder setZoom(double zoom) {
-            this.zoom = zoom;
-            return this;
-        }
-
         public JuliaBuilder setStep(double step) {
             this.step = step;
             return this;
@@ -79,11 +73,10 @@ public class Julia {
 
         public Julia build() {
             Julia julia = new Julia(this);
-            validJuliaObject(julia);
             return julia;
         }
 
-        public JuliaBuilder(int maxIt, int radius, Complex constant, double step, double zoom, double xMax, double xMin, double yMax, double yMin) {
+        /*public JuliaBuilder(int maxIt, int radius, Complex constant, double step, double zoom, double xMax, double xMin, double yMax, double yMin) {
             this.maxIt = maxIt;
             this.radius = radius;
             this.constant = constant;
@@ -93,11 +86,7 @@ public class Julia {
             this.xMin = xMin;
             this.yMax = yMax;
             this.yMin = yMin;
-        }
-
-        private void validJuliaObject(Julia julia) {
-
-        }
+        }*/
     }
 
     int divergenceIndex(Complex z0) {
@@ -145,7 +134,7 @@ public class Julia {
                 image.setRGB(i, j, color(divTab[i][j]));
             }
         }
-        File file = new File("FDP.png");
+        File file = new File("FractalView.png");
         ImageIO.write(image, "PNG", file);
     }
 
