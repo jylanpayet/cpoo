@@ -1,2 +1,2 @@
-xmin;xmax;ymin;ymax;répétitions;parie reelle;partie imagianaire;pas
--1;1;-1;1;2;1000;-0.8;0.156;0.001
+MaxIt;radius;parie reelle;partie imagianaire;step;xMax;xMin;yMax;yMin
+1000;2;-0.8;0.156;0.001;1;-1;1;-1;fractale1

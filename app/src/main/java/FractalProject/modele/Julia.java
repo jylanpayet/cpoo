@@ -1,4 +1,4 @@
-package modele;
+package FractalProject.modele;
 
 import org.apache.commons.math3.complex.Complex;
 
@@ -75,18 +75,6 @@ public class Julia {
             Julia julia = new Julia(this);
             return julia;
         }
-
-        /*public JuliaBuilder(int maxIt, int radius, Complex constant, double step, double zoom, double xMax, double xMin, double yMax, double yMin) {
-            this.maxIt = maxIt;
-            this.radius = radius;
-            this.constant = constant;
-            this.step = step;
-            this.zoom = zoom;
-            this.xMax = xMax;
-            this.xMin = xMin;
-            this.yMax = yMax;
-            this.yMin = yMin;
-        }*/
     }
 
     int divergenceIndex(Complex z0) {
@@ -124,7 +112,7 @@ public class Julia {
         return Color.HSBtoRGB((float) div/ maxIt, 0.7f, 0.7f);
     }
 
-    public void drawFractal() throws IOException {
+    public void drawFractal(String nom) throws IOException {
         int width = (int) ((Math.abs(xMax - xMin)) / this.step) + 1;
         int height = (int) ((Math.abs(yMax - yMin)) / this.step) + 1;
         var image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -134,7 +122,7 @@ public class Julia {
                 image.setRGB(i, j, color(divTab[i][j]));
             }
         }
-        File file = new File("FractalView.png");
+        File file = new File(nom+".png");
         ImageIO.write(image, "PNG", file);
     }
 
