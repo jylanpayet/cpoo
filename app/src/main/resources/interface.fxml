@@ -37,6 +37,8 @@
                                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
                                        <Button fx:id="topng" layoutX="429.0" layoutY="12.0" mnemonicParsing="false" text="to PNG" />
+                                       <TextField fx:id="filename" layoutX="263.0" layoutY="12.0" promptText="filename" />
+                                       <Button fx:id="generate" layoutX="8.0" layoutY="12.0" mnemonicParsing="false" text="Generate" />
                                     </children>
                                  </AnchorPane>
                               </children>

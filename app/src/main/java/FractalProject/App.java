@@ -19,6 +19,8 @@ public class App extends Application {
     @FXML
     public Stage stage;
     @FXML
+    public TextField maxIt;
+    @FXML
     public TextField re;
     @FXML
     public TextField im;
@@ -35,11 +37,47 @@ public class App extends Application {
     @FXML
     public TextField yMax;
     @FXML
-    public TextField maxIt;
+    public TextField filename;
     @FXML
     public Button topng;
     @FXML
+    public Button generate;
+    @FXML
     public ImageView image;
+
+    @FXML
+    public void generate (){
+        /*
+        traiter les données
+         */
+        /*
+        String a = re.getText();
+        String b = im.getText();
+        String c = step.getText();
+        String d = radius.getText();
+        String e = xMax.getText();
+        String f = xMin.getText();
+        String g = yMax.getText();
+        String h = yMin.getText();
+        String i = maxIt.getText();
+        String j = filename.getText();
+        Julia fractal = new JuliaBuilder().
+                setMaxIt(i).
+                setRadius(Integer.parseInt(d)).
+                setConstant(new Complex(Double.parseDouble(a),Double.parseDouble(b))).
+                setStep(Double.parseDouble(c)).
+                setxMax(Double.parseDouble(e)).
+                setxMin(Double.parseDouble(f)).
+                setyMax(Double.parseDouble(g)).
+                setyMin(Double.parseDouble(h)).build();
+
+        try {
+            fractal.drawFractal(j);
+        } catch (Exception e) {
+
+        }
+        */
+    }
 
     @Override
     public void start(Stage stage) {
