@@ -3,8 +3,8 @@ package FractalProject;
 import java.io.File;
 import java.util.Scanner;
 import org.apache.commons.math3.complex.Complex;
-import FractalProject.modele.Julia;
-import FractalProject.modele.Julia.JuliaBuilder;
+import FractalProject.modele.Fractal;
+import FractalProject.modele.Fractal.FractalBuilder;
 import FractalProject.vue.Vue;
 import javafx.application.Application;
 
@@ -21,7 +21,7 @@ public class App {
             }
             sc.close();
             String [] t = data.split(";");
-            Julia fractal = new JuliaBuilder().
+            Fractal fractal = new FractalBuilder().
                     setMaxIt(Integer.parseInt(t[0])).
                     setRadius(Integer.parseInt(t[1])).
                     setConstant(new Complex(Double.parseDouble(t[2]),Double.parseDouble(t[3]))).
@@ -29,9 +29,10 @@ public class App {
                     setxMax(Double.parseDouble(t[5])).
                     setxMin(Double.parseDouble(t[6])).
                     setyMax(Double.parseDouble(t[7])).
-                    setyMin(Double.parseDouble(t[8])).build();
+                    setyMin(Double.parseDouble(t[8])).
+                    setMode(Integer.parseInt(t[10]) == 1 ? true : false).build();
             fractal.drawFractal();
-            Julia.createFile(t[9],fractal.getImg());
+            Fractal.createFile(t[9],fractal.getImg());
         } catch (Exception e) {
             System.out.println("Le fichier n'a pas été bien paramétré.");
         }

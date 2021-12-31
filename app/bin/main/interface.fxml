@@ -15,46 +15,47 @@
     <scene>
         <Scene>
             <AnchorPane prefHeight="800.0" prefWidth="800.0">
-            <children>
-               <SplitPane dividerPositions="0.17555555555555555" orientation="VERTICAL" prefHeight="800.0" prefWidth="800.0">
-                 <items>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                        <children>
-                           <VBox prefHeight="76.0" prefWidth="797.0">
-                              <children>
-                                 <HBox prefHeight="75.0" prefWidth="800.0">
-                                    <children>
-                                       <TextField fx:id="maxIt" promptText="MaxIt" text="1000" />
-                                       <TextField fx:id="radius" promptText="Radius" text="2" />
-                                       <TextField fx:id="re" promptText="re" text="-0.8" />
-                                       <TextField fx:id="im" promptText="im" text="0.156" />
-                                       <TextField fx:id="step" promptText="step" text="0.01" />
-                                       <TextField promptText="xMax" text="1" fx:id="xMax" />
-                                       <TextField promptText="xMin" text="-1" fx:id="xMin" />
-                                       <TextField fx:id="yMax" promptText="yMax" text="1" />
-                                       <TextField fx:id="yMin" promptText="yMin" text="-1" />
-                                    </children>
-                                 </HBox>
-                                 <AnchorPane prefHeight="37.0" prefWidth="800.0">
-                                    <children>
-                                       <Button fx:id="topng" layoutX="736.0" layoutY="12.0" mnemonicParsing="false" onAction="#toPngAction" text="to PNG" />
-                                       <TextField fx:id="filename" layoutX="578.0" layoutY="12.0" promptText="filename" />
-                                       <Button fx:id="generate" layoutX="8.0" layoutY="12.0" mnemonicParsing="false" onAction="#generateAction" text="Generate" />
-                                       <Label fx:id="errorMsg" layoutX="275.0" layoutY="16.0" text="Veuillez remplir correctement tous les champs." textFill="#f82803" visible="false" />
-                                    </children>
-                                 </AnchorPane>
-                              </children>
-                           </VBox>
-                        </children>
-                     </AnchorPane>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: BLACK;">
-                        <children>
-                           <ImageView fx:id="image" fitHeight="600.0" fitWidth="600.0" layoutX="99.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-                        </children>
-                     </AnchorPane>
-                 </items>
-               </SplitPane>
-            </children></AnchorPane>
+                <children>
+                    <SplitPane dividerPositions="0.17555555555555555" orientation="VERTICAL" prefHeight="800.0" prefWidth="800.0">
+                        <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                <children>
+                                    <VBox prefHeight="76.0" prefWidth="797.0">
+                                        <children>
+                                            <HBox prefHeight="75.0" prefWidth="800.0">
+                                                <children>
+                                                    <TextField fx:id="maxIt" promptText="MaxIt" text="1000" />
+                                                    <TextField fx:id="radius" promptText="Radius" text="2" />
+                                                    <TextField fx:id="re" promptText="re" text="-0.8" />
+                                                    <TextField fx:id="im" promptText="im" text="0.156" />
+                                                    <TextField fx:id="step" promptText="step" text="0.01" />
+                                                    <TextField promptText="xMax" text="1" fx:id="xMax" />
+                                                    <TextField promptText="xMin" text="-1" fx:id="xMin" />
+                                                    <TextField fx:id="yMax" promptText="yMax" text="1" />
+                                                    <TextField fx:id="yMin" promptText="yMin" text="-1" />
+                                                </children>
+                                            </HBox>
+                                            <AnchorPane prefHeight="37.0" prefWidth="800.0">
+                                                <children>
+                                                    <Button fx:id="topng" layoutX="736.0" layoutY="12.0" mnemonicParsing="false" onAction="#toPngAction" text="to PNG" />
+                                                    <TextField fx:id="filename" layoutX="578.0" layoutY="12.0" promptText="filename" />
+                                                    <Button fx:id="generate" layoutX="8.0" layoutY="12.0" mnemonicParsing="false" onAction="#generateAction" text="Generate" />
+                                                    <Label fx:id="errorMsg" layoutX="275.0" layoutY="16.0" text="Veuillez remplir correctement tous les champs." textFill="#f82803" visible="false" />
+                                                </children>
+                                            </AnchorPane>
+                                        </children>
+                                    </VBox>
+                           <Button id="1" fx:id="switchButton" layoutX="8.0" layoutY="85.0" mnemonicParsing="false" onAction="#switchMode" style="-fx-background-color: green; -fx-text-fill: white;" text="Julia" />
+                                </children>
+                            </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: BLACK;">
+                                <children>
+                                    <ImageView fx:id="image" fitHeight="600.0" fitWidth="600.0" layoutX="99.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                                </children>
+                            </AnchorPane>
+                        </items>
+                    </SplitPane>
+                </children></AnchorPane>
         </Scene>
     </scene>
 </Stage>

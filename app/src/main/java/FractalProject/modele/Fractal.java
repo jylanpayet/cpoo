@@ -6,13 +6,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Julia {
+public class Fractal {
     private final int maxIt, radius;
     private final Complex constant;
     private final double xMax, xMin, yMax, yMin, step;
     private BufferedImage img;
+    private Boolean mode;
 
-    public Julia(JuliaBuilder builder) {
+    public Fractal(FractalBuilder builder) {
         this.maxIt = builder.maxIt;
         this.radius = builder.radius;
         this.constant = builder.constant;
@@ -21,6 +22,7 @@ public class Julia {
         this.xMin = builder.xMin;
         this.yMax = builder.yMax;
         this.yMin = builder.yMin;
+        this.mode = builder.mode;
     }
 
     public BufferedImage getImg() {
@@ -28,80 +30,109 @@ public class Julia {
     }
 
 
-    public static class JuliaBuilder {
+    public static class FractalBuilder {
         private int maxIt;
         private int radius;
         private Complex constant;
         private double xMax, xMin, yMax, yMin, step;
+        private boolean mode;
 
-        public JuliaBuilder setMaxIt(int maxIt) {
+        public FractalBuilder setMaxIt(int maxIt) {
             this.maxIt = maxIt;
             return this;
         }
 
-        public JuliaBuilder setRadius(int radius) {
+        public FractalBuilder setRadius(int radius) {
             this.radius = radius;
             return this;
         }
 
-        public JuliaBuilder setConstant(Complex constant) {
+        public FractalBuilder setConstant(Complex constant) {
             this.constant = constant;
             return this;
         }
 
-        public JuliaBuilder setxMax(double xMax) {
+        public FractalBuilder setxMax(double xMax) {
             this.xMax = xMax;
             return this;
         }
 
-        public JuliaBuilder setxMin(double xMin) {
+        public FractalBuilder setxMin(double xMin) {
             this.xMin = xMin;
             return this;
         }
 
-        public JuliaBuilder setyMax(double yMax) {
+        public FractalBuilder setyMax(double yMax) {
             this.yMax = yMax;
             return this;
         }
 
-        public JuliaBuilder setyMin(double yMin) {
+        public FractalBuilder setyMin(double yMin) {
             this.yMin = yMin;
             return this;
         }
 
-        public JuliaBuilder setStep(double step) {
+        public FractalBuilder setStep(double step) {
             this.step = step;
             return this;
         }
 
-        public Julia build() {
-            Julia julia = new Julia(this);
-            return julia;
+        public Fractal build() {
+            Fractal fractal = new Fractal(this);
+            return fractal;
+        }
+
+        public FractalBuilder setMode(boolean mode) {
+            this.mode = mode;
+            return this;
         }
     }
 
     int divergenceIndex(Complex z0) {
-        int ite = 0;
+        if(mode) {
+        int iteration = 0;
         Complex zn = z0;
-        while (ite < maxIt - 1 && zn.abs() <= radius) {
+        while (iteration < maxIt - 1 && zn.abs() <= radius) {
             zn = zn.pow(2);
             zn = zn.add(constant);
-            ite++;
+            iteration++;
         }
-        return ite;
+        return iteration;
+    } else {
+        double x = 0, y = 0;
+        int iteration = 0;
+        while (x*x+y*y <= 4 && iteration < maxIt) {
+            double x_new = x*x - y*y + z0.getReal();
+            y = 2*x*y + z0.getImaginary();
+            x = x_new;
+            iteration++;
+        }
+        return iteration;
+    }
     }
 
+    /*int divergenceIndexM(Complex z0){
+        double x = 0, y = 0;
+        int iteration = 0;
+        while (x*x+y*y <= 4 && iteration < maxIt) {
+            double x_new = x*x - y*y + z0.getReal();
+            y = 2*x*y + z0.getImaginary();
+            x = x_new;
+            iteration++;
+        }
+        return iteration;
+    }
+    
     int divergenceIndexM(Complex z0){
         int ite = 0;
         Complex zm = new Complex(0,0);
-        Complex zn = z0;
-        while (ite < maxIt - 1 && zm.abs() <= radius) {
-            zm = zn.pow(2);
-            zm = zm.add(zn);
+        while (ite < maxIt && zm.abs() <= radius) {
+            zm = zm.pow(2);
+            zm = zm.add(z0);
             ite++;
         }
         return ite;
-    }
+    }*/
 
     int color(int div) {
         if(div==this.maxIt) {
@@ -118,7 +149,7 @@ public class Julia {
         var image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                image.setRGB(j, i, color(divergenceIndexM(new Complex(realPart, imaginaryPart))));
+                image.setRGB(j, i, color(divergenceIndex(new Complex(realPart, imaginaryPart))));
                 realPart += step;
             }
             realPart = xMin;

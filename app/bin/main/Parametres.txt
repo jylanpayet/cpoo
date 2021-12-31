@@ -1,2 +1,2 @@
-MaxIt;radius;parie reelle;partie imagianaire;step;xMax;xMin;yMax;yMin
-1000;2;-0.8;0.156;0.01;1;-1;1;-1;fractale1
+MaxIt;radius;parie reelle;partie imagianaire;step;xMax;xMin;yMax;yMin;mode : 1 pour Julia et 0 pour Mandelbrot
+1000;2;-0.8;0.156;0.01;1;-1;1;-1;fractale1;1

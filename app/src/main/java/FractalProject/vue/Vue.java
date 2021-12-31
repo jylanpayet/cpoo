@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -13,8 +14,8 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import org.apache.commons.math3.complex.Complex;
-import FractalProject.modele.Julia;
-import FractalProject.modele.Julia.JuliaBuilder;
+import FractalProject.modele.Fractal;
+import FractalProject.modele.Fractal.FractalBuilder;
 
 public class Vue extends Application {
     @FXML
@@ -47,7 +48,9 @@ public class Vue extends Application {
     public ImageView image;
     @FXML
     public Label errorMsg;
-    public Julia modele;
+    public Fractal modele;
+    @FXML
+    public Button switchButton;
 
     private static ImageView convertToFxImage(BufferedImage image) {
         WritableImage wr = null;
@@ -63,10 +66,26 @@ public class Vue extends Application {
         return new ImageView(wr);
     }
 
+    @FXML 
+    public void switchMode () {
+        if (switchButton.getId().equals("1"))
+                {
+                    switchButton.setText("Mandelbrot");
+                    switchButton.setStyle("-fx-background-color: grey;-fx-text-fill:black;");
+                    switchButton.setId("2");
+                }
+                else
+                {
+                    switchButton.setText("Julia");
+                    switchButton.setStyle("-fx-background-color: green;-fx-text-fill:white;");
+                    switchButton.setId("1");
+                }
+    }
+
     @FXML
     public void toPngAction () throws IOException {
         if(this.modele != null && filename.getText().length() != 0) {
-            Julia.createFile(filename.getText(), this.modele.getImg());
+            Fractal.createFile(filename.getText(), this.modele.getImg());
             errorMsg.setVisible(false);
         } else {
             errorMsg.setText("Veuillez renseigner le nom du fichier.");
@@ -78,7 +97,7 @@ public class Vue extends Application {
     public void generateAction (){
         try {
             errorMsg.setVisible(false);
-            this.modele = new JuliaBuilder().
+            this.modele = new FractalBuilder().
                     setMaxIt(Integer.parseInt(maxIt.getText())).
                     setRadius(Integer.parseInt(radius.getText())).
                     setConstant(new Complex(Double.parseDouble(re.getText()),Double.parseDouble(im.getText()))).
@@ -86,7 +105,8 @@ public class Vue extends Application {
                     setxMax(Double.parseDouble(xMax.getText())).
                     setxMin(Double.parseDouble(xMin.getText())).
                     setyMax(Double.parseDouble(yMax.getText())).
-                    setyMin(Double.parseDouble(yMin.getText())).build();
+                    setyMin(Double.parseDouble(yMin.getText())).
+                    setMode(switchButton.getId().equals("1") ? true : false).build();
             this.modele.drawFractal();
             image.setImage(convertToFxImage(this.modele.getImg()).getImage());
         } catch (Exception e) {

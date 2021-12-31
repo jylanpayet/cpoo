@@ -45,6 +45,7 @@
                                             </AnchorPane>
                                         </children>
                                     </VBox>
+                           <Button id="1" fx:id="switchButton" layoutX="8.0" layoutY="85.0" mnemonicParsing="false" onAction="#switchMode" style="-fx-background-color: green; -fx-text-fill: white;" text="Julia" />
                                 </children>
                             </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: BLACK;">
