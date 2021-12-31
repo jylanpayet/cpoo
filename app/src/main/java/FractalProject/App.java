@@ -3,92 +3,15 @@ package FractalProject;
 import java.io.File;
 import java.util.Scanner;
 
-import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 import org.apache.commons.math3.complex.Complex;
 
 import FractalProject.modele.Julia;
 import FractalProject.modele.Julia.JuliaBuilder;
+import FractalProject.vue.Vue;
+import javafx.application.Application;
 
-public class App extends Application {
-    @FXML
-    public Stage stage;
-    @FXML
-    public TextField maxIt;
-    @FXML
-    public TextField re;
-    @FXML
-    public TextField im;
-    @FXML
-    public TextField step;
-    @FXML
-    public TextField radius;
-    @FXML
-    public TextField xMin;
-    @FXML
-    public TextField xMax;
-    @FXML
-    public TextField yMin;
-    @FXML
-    public TextField yMax;
-    @FXML
-    public TextField filename;
-    @FXML
-    public Button topng;
-    @FXML
-    public Button generate;
-    @FXML
-    public ImageView image;
+public class App {
 
-    @FXML
-    public void generate (){
-        /*
-        traiter les données
-         */
-        /*
-        String a = re.getText();
-        String b = im.getText();
-        String c = step.getText();
-        String d = radius.getText();
-        String e = xMax.getText();
-        String f = xMin.getText();
-        String g = yMax.getText();
-        String h = yMin.getText();
-        String i = maxIt.getText();
-        String j = filename.getText();
-        Julia fractal = new JuliaBuilder().
-                setMaxIt(i).
-                setRadius(Integer.parseInt(d)).
-                setConstant(new Complex(Double.parseDouble(a),Double.parseDouble(b))).
-                setStep(Double.parseDouble(c)).
-                setxMax(Double.parseDouble(e)).
-                setxMin(Double.parseDouble(f)).
-                setyMax(Double.parseDouble(g)).
-                setyMin(Double.parseDouble(h)).build();
-
-        try {
-            fractal.drawFractal(j);
-        } catch (Exception e) {
-
-        }
-        */
-    }
-
-    @Override
-    public void start(Stage stage) {
-        try {
-            stage = FXMLLoader.load(getClass().getResource("/interface.fxml"));
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        stage.show();
-    }
     public static void Terminal (){
         try{
             String data= "";
@@ -122,11 +45,11 @@ public class App extends Application {
             int str = sc.nextInt();
             switch (str) {
                 case 1 -> Terminal();
-                case 2 -> launch(args);
+                case 2 -> Application.launch(Vue.class, args);
                 default -> System.out.println("Choix incorrect.");
             }
         }catch(Exception e){
-            System.out.println("Une erreur c'est produite.");
+            System.out.println("Une erreur s'est produite.");
         }
     }
 }

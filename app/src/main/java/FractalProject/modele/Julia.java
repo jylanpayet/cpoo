@@ -88,23 +88,6 @@ public class Julia {
         return ite;
     }
 
-    public int[][] createTabDiv() {
-        int width = (int) ((Math.abs(xMax - xMin)) / this.step) + 1;
-        int height = (int) ((Math.abs(yMax - yMin)) / this.step) + 1;
-        int[][] res = new int[width][height];
-        double realPart = xMin;
-        double imaginaryPart = yMin;
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                res[i][j] = divergenceIndex(new Complex(realPart, imaginaryPart));
-                realPart += step;
-            }
-            realPart = xMin;
-            imaginaryPart += this.step;
-        }
-        return res;
-    }
-
     int color(int div) {
         if(div==this.maxIt) {
             return (0 << 16) + (0 << 8) + 0;
@@ -115,12 +98,16 @@ public class Julia {
     public BufferedImage drawFractal() {
         int width = (int) ((Math.abs(xMax - xMin)) / this.step) + 1;
         int height = (int) ((Math.abs(yMax - yMin)) / this.step) + 1;
+        double realPart = xMin;
+        double imaginaryPart = yMin;
         var image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        int[][] divTab = createTabDiv();
-        for (int i = 0; i < divTab.length; i++) {
-            for (int j = 0; j < divTab[i].length; j++) {
-                image.setRGB(i, j, color(divTab[i][j]));
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                image.setRGB(i, j, color(divergenceIndex(new Complex(realPart, imaginaryPart))));
+                realPart += step;
             }
+            realPart = xMin;
+            imaginaryPart += this.step;
         }
         return image;
     }
