@@ -117,9 +117,8 @@ public class App extends Application {
     }
     public static void main(String[] args) {
         try {
-            Scanner sc = new Scanner(System.in);
             System.out.println("Tapez 1 pour le terminal et 2 pour le graphics :");
-            int str = sc.nextInt();
+            int str = 1;
             switch (str) {
                 case 1 -> Terminal();
                 case 2 -> launch(args);
