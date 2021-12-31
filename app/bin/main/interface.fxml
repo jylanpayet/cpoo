@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<Stage fx:id="stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FractalProject.App">
+<Stage fx:id="stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FractalProject.vue.Vue">
     <scene>
         <Scene>
             <AnchorPane prefHeight="451.0" prefWidth="496.0">
@@ -38,7 +38,7 @@
                                     <children>
                                        <Button fx:id="topng" layoutX="429.0" layoutY="12.0" mnemonicParsing="false" text="to PNG" />
                                        <TextField fx:id="filename" layoutX="263.0" layoutY="12.0" promptText="filename" />
-                                       <Button fx:id="generate" layoutX="8.0" layoutY="12.0" mnemonicParsing="false" text="Generate" />
+                                       <Button fx:id="generate" layoutX="8.0" layoutY="12.0" mnemonicParsing="false" text="Generate" onAction="#generate"/>
                                     </children>
                                  </AnchorPane>
                               </children>

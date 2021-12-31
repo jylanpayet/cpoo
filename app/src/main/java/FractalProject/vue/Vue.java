@@ -75,7 +75,9 @@ public class Vue extends Application {
                 setxMin(Double.parseDouble(xMin.getText())).
                 setyMax(Double.parseDouble(yMax.getText())).
                 setyMin(Double.parseDouble(yMin.getText())).build();
-            image=convertToFxImage(fractal.drawFractal());
+            var test = fractal.drawFractal();    
+            image=convertToFxImage(test);
+            Julia.createFile("Test", test);
         } catch (Exception e) {
             System.out.println("Une erreur est survenu.");
         }
@@ -85,6 +87,7 @@ public class Vue extends Application {
     public void start(Stage stage) {
         try {
             stage = FXMLLoader.load(getClass().getResource("/interface.fxml"));
+            generate = new Button();
             generate.setOnAction(a -> generate());
         }
         catch (Exception e) {
