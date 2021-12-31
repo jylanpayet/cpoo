@@ -11,7 +11,7 @@ public class Fractal {
     private final Complex constant;
     private final double xMax, xMin, yMax, yMin, step;
     private BufferedImage img;
-    private Boolean mode;
+    private final boolean mode;
 
     public Fractal(FractalBuilder builder) {
         this.maxIt = builder.maxIt;
@@ -78,8 +78,7 @@ public class Fractal {
         }
 
         public Fractal build() {
-            Fractal fractal = new Fractal(this);
-            return fractal;
+            return new Fractal(this);
         }
 
         public FractalBuilder setMode(boolean mode) {
@@ -90,49 +89,26 @@ public class Fractal {
 
     int divergenceIndex(Complex z0) {
         if(mode) {
-        int iteration = 0;
-        Complex zn = z0;
-        while (iteration < maxIt - 1 && zn.abs() <= radius) {
-            zn = zn.pow(2);
-            zn = zn.add(constant);
-            iteration++;
+            int iteration = 0;
+            Complex zn = z0;
+            while (iteration < maxIt - 1 && zn.abs() <= radius) {
+                zn = zn.pow(2);
+                zn = zn.add(constant);
+                iteration++;
+            }
+            return iteration;
+        } else {
+            double x = 0, y = 0;
+            int iteration = 0;
+            while (x*x+y*y <= 4 && iteration < maxIt) {
+                double x_new = x*x - y*y + z0.getReal();
+                y = 2*x*y + z0.getImaginary();
+                x = x_new;
+                iteration++;
+            }
+            return iteration;
         }
-        return iteration;
-    } else {
-        double x = 0, y = 0;
-        int iteration = 0;
-        while (x*x+y*y <= 4 && iteration < maxIt) {
-            double x_new = x*x - y*y + z0.getReal();
-            y = 2*x*y + z0.getImaginary();
-            x = x_new;
-            iteration++;
-        }
-        return iteration;
     }
-    }
-
-    /*int divergenceIndexM(Complex z0){
-        double x = 0, y = 0;
-        int iteration = 0;
-        while (x*x+y*y <= 4 && iteration < maxIt) {
-            double x_new = x*x - y*y + z0.getReal();
-            y = 2*x*y + z0.getImaginary();
-            x = x_new;
-            iteration++;
-        }
-        return iteration;
-    }
-    
-    int divergenceIndexM(Complex z0){
-        int ite = 0;
-        Complex zm = new Complex(0,0);
-        while (ite < maxIt && zm.abs() <= radius) {
-            zm = zm.pow(2);
-            zm = zm.add(z0);
-            ite++;
-        }
-        return ite;
-    }*/
 
     int color(int div) {
         if(div==this.maxIt) {

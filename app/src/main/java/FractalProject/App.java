@@ -30,7 +30,7 @@ public class App {
                     setxMin(Double.parseDouble(t[6])).
                     setyMax(Double.parseDouble(t[7])).
                     setyMin(Double.parseDouble(t[8])).
-                    setMode(Integer.parseInt(t[10]) == 1 ? true : false).build();
+                    setMode(Integer.parseInt(t[10]) == 1).build();
             fractal.drawFractal();
             Fractal.createFile(t[9],fractal.getImg());
         } catch (Exception e) {

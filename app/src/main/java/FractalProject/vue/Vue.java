@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -106,7 +105,7 @@ public class Vue extends Application {
                     setxMin(Double.parseDouble(xMin.getText())).
                     setyMax(Double.parseDouble(yMax.getText())).
                     setyMin(Double.parseDouble(yMin.getText())).
-                    setMode(switchButton.getId().equals("1") ? true : false).build();
+                    setMode(switchButton.getId().equals("1")).build();
             this.modele.drawFractal();
             image.setImage(convertToFxImage(this.modele.getImg()).getImage());
         } catch (Exception e) {
