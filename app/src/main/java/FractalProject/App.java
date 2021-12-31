@@ -116,15 +116,17 @@ public class App extends Application {
         }
     }
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Tapez 1 pour le terminal et 2 pour le graphics :");
-        int str = sc.nextInt();
-        switch(str){
-            case 1: Terminal();
-                break;
-            case 2: launch(args);
-                break;
-            default: System.out.println("Choix incorrect.");
+        try {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Tapez 1 pour le terminal et 2 pour le graphics :");
+            int str = sc.nextInt();
+            switch (str) {
+                case 1 -> Terminal();
+                case 2 -> launch(args);
+                default -> System.out.println("Choix incorrect.");
+            }
+        }catch(Exception e){
+            System.out.println("Une erreur c'est produite.");
         }
     }
 }
