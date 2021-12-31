@@ -1,5 +1,6 @@
 package FractalProject.vue;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Scanner;
 
@@ -9,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import org.apache.commons.math3.complex.Complex;
 
@@ -45,41 +48,44 @@ public class Vue extends Application {
     @FXML
     public ImageView image;
 
-    /*@FXML
+    private static ImageView convertToFxImage(BufferedImage image) {
+        WritableImage wr = null;
+        if (image != null) {
+            wr = new WritableImage(image.getWidth(), image.getHeight());
+            PixelWriter pw = wr.getPixelWriter();
+            for (int x = 0; x < image.getWidth(); x++) {
+                for (int y = 0; y < image.getHeight(); y++) {
+                    pw.setArgb(x, y, image.getRGB(x, y));
+                }
+            }
+        }
+        return new ImageView(wr);
+    }
+
+    @FXML
     public void generate (){
-        
-        String a = re.getText();
-        String b = im.getText();
-        String c = step.getText();
-        String d = radius.getText();
-        String e = xMax.getText();
-        String f = xMin.getText();
-        String g = yMax.getText();
-        String h = yMin.getText();
-        String i = maxIt.getText();
+        try {
         String j = filename.getText();
         Julia fractal = new JuliaBuilder().
-                setMaxIt(i).
-                setRadius(Integer.parseInt(d)).
-                setConstant(new Complex(Double.parseDouble(a),Double.parseDouble(b))).
-                setStep(Double.parseDouble(c)).
-                setxMax(Double.parseDouble(e)).
-                setxMin(Double.parseDouble(f)).
-                setyMax(Double.parseDouble(g)).
-                setyMin(Double.parseDouble(h)).build();
-
-        try {
-            fractal.drawFractal(j);
+                setMaxIt(Integer.parseInt(maxIt.getText())).
+                setRadius(Integer.parseInt(radius.getText())).
+                setConstant(new Complex(Double.parseDouble(re.getText()),Double.parseDouble(im.getText()))).
+                setStep(Double.parseDouble(step.getText())).
+                setxMax(Double.parseDouble(xMax.getText())).
+                setxMin(Double.parseDouble(xMin.getText())).
+                setyMax(Double.parseDouble(yMax.getText())).
+                setyMin(Double.parseDouble(yMin.getText())).build();
+            image=convertToFxImage(fractal.drawFractal());
         } catch (Exception e) {
-
+            System.out.println("Une erreur est survenu.");
         }
-        
-    }*/
+    }
 
     @Override
     public void start(Stage stage) {
         try {
             stage = FXMLLoader.load(getClass().getResource("/interface.fxml"));
+            generate.setOnAction(a -> generate());
         }
         catch (Exception e) {
             e.printStackTrace();
