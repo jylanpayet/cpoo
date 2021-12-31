@@ -72,12 +72,18 @@ public class Vue extends Application {
                     switchButton.setText("Mandelbrot");
                     switchButton.setStyle("-fx-background-color: grey;-fx-text-fill:black;");
                     switchButton.setId("2");
+                    re.setVisible(false);
+                    re.setText("0");
+                    im.setVisible(false);
+                    im.setText("0");
                 }
                 else
                 {
                     switchButton.setText("Julia");
                     switchButton.setStyle("-fx-background-color: green;-fx-text-fill:white;");
                     switchButton.setId("1");
+                    re.setVisible(true);
+                    im.setVisible(true);
                 }
     }
 

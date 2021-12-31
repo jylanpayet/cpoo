@@ -24,15 +24,15 @@
                                         <children>
                                             <HBox prefHeight="75.0" prefWidth="800.0">
                                                 <children>
-                                                    <TextField fx:id="maxIt" promptText="MaxIt" text="1000" />
-                                                    <TextField fx:id="radius" promptText="Radius" text="2" />
-                                                    <TextField fx:id="re" promptText="re" text="-0.8" />
-                                                    <TextField fx:id="im" promptText="im" text="0.156" />
-                                                    <TextField fx:id="step" promptText="step" text="0.01" />
-                                                    <TextField promptText="xMax" text="1" fx:id="xMax" />
-                                                    <TextField promptText="xMin" text="-1" fx:id="xMin" />
-                                                    <TextField fx:id="yMax" promptText="yMax" text="1" />
-                                                    <TextField fx:id="yMin" promptText="yMin" text="-1" />
+                                                    <TextField fx:id="maxIt" promptText="MaxIt" />
+                                                    <TextField fx:id="radius" promptText="Radius" />
+                                                    <TextField fx:id="re" promptText="re" />
+                                                    <TextField fx:id="im" promptText="im" />
+                                                    <TextField fx:id="step" promptText="step" />
+                                                    <TextField promptText="xMax" fx:id="xMax" />
+                                                    <TextField promptText="xMin" fx:id="xMin" />
+                                                    <TextField fx:id="yMax" promptText="yMax" />
+                                                    <TextField fx:id="yMin" promptText="yMin" />
                                                 </children>
                                             </HBox>
                                             <AnchorPane prefHeight="37.0" prefWidth="800.0">
