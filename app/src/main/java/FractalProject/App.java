@@ -32,8 +32,8 @@ public class App {
                     setxMin(Double.parseDouble(t[6])).
                     setyMax(Double.parseDouble(t[7])).
                     setyMin(Double.parseDouble(t[8])).build();
-            var image = fractal.drawFractal();
-            Julia.createFile(t[9],image);
+                fractal.drawFractal();
+            Julia.createFile(t[9],fractal.getImg());
         } catch (Exception e) {
             System.out.println("Le fichier n'a pas été bien paramétré.");
         }

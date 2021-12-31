@@ -2,13 +2,17 @@ package FractalProject.vue;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
@@ -47,6 +51,9 @@ public class Vue extends Application {
     public Button generate;
     @FXML
     public ImageView image;
+    public Julia modele;
+    @FXML
+    public Label errorMsg;
 
     private static ImageView convertToFxImage(BufferedImage image) {
         WritableImage wr = null;
@@ -63,10 +70,21 @@ public class Vue extends Application {
     }
 
     @FXML
-    public void generate (){
+    public void toPngAction () throws IOException {
+        if(this.modele != null && filename.getText().length() != 0) {
+        Julia.createFile(filename.getText(), this.modele.getImg());
+        errorMsg.setVisible(false);
+        } else {
+            errorMsg.setText("Veuillez renseigner le nom du fichier.");
+            errorMsg.setVisible(true);
+        }
+    }
+
+    @FXML
+    public void generateAction (){
+        errorMsg.setVisible(false);
         try {
-        String j = filename.getText();
-        Julia fractal = new JuliaBuilder().
+        this.modele = new JuliaBuilder().
                 setMaxIt(Integer.parseInt(maxIt.getText())).
                 setRadius(Integer.parseInt(radius.getText())).
                 setConstant(new Complex(Double.parseDouble(re.getText()),Double.parseDouble(im.getText()))).
@@ -75,11 +93,12 @@ public class Vue extends Application {
                 setxMin(Double.parseDouble(xMin.getText())).
                 setyMax(Double.parseDouble(yMax.getText())).
                 setyMin(Double.parseDouble(yMin.getText())).build();
-            var test = fractal.drawFractal();    
-            image=convertToFxImage(test);
-            Julia.createFile("Test", test);
+            this.modele.drawFractal();    
+            Image frac = convertToFxImage(this.modele.getImg()).getImage();
+            image.setImage(frac);
         } catch (Exception e) {
-            System.out.println("Une erreur est survenu.");
+            errorMsg.setText("Veuillez remplir correctement tous les champs.");
+            errorMsg.setVisible(true);
         }
     }
 
@@ -87,8 +106,8 @@ public class Vue extends Application {
     public void start(Stage stage) {
         try {
             stage = FXMLLoader.load(getClass().getResource("/interface.fxml"));
-            generate = new Button();
-            generate.setOnAction(a -> generate());
+            /*generate = new Button();
+            generate.setOnAction(a -> generate());*/
         }
         catch (Exception e) {
             e.printStackTrace();

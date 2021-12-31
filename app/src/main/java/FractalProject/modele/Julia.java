@@ -2,6 +2,8 @@ package FractalProject.modele;
 
 import org.apache.commons.math3.complex.Complex;
 
+import javafx.scene.image.Image;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,6 +14,7 @@ public class Julia {
     private final int maxIt, radius;
     private final Complex constant;
     private final double xMax, xMin, yMax, yMin, step;
+    private BufferedImage img;
 
     public Julia(JuliaBuilder builder) {
         this.maxIt = builder.maxIt;
@@ -22,6 +25,10 @@ public class Julia {
         this.xMin = builder.xMin;
         this.yMax = builder.yMax;
         this.yMin = builder.yMin;
+    }
+
+    public BufferedImage getImg() {
+        return this.img;
     }
 
 
@@ -95,7 +102,7 @@ public class Julia {
         return Color.HSBtoRGB((float) div/ maxIt, 0.7f, 0.7f);
     }
 
-    public BufferedImage drawFractal() {
+    public void drawFractal() {
         int width = (int) ((Math.abs(xMax - xMin)) / this.step) + 1;
         int height = (int) ((Math.abs(yMax - yMin)) / this.step) + 1;
         double realPart = xMin;
@@ -103,13 +110,13 @@ public class Julia {
         var image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                image.setRGB(i, j, color(divergenceIndex(new Complex(realPart, imaginaryPart))));
+                image.setRGB(j, i, color(divergenceIndex(new Complex(realPart, imaginaryPart))));
                 realPart += step;
             }
             realPart = xMin;
             imaginaryPart += this.step;
         }
-        return image;
+        this.img = image;
     }
     public static void createFile(String nom,BufferedImage image) throws IOException {
         File file = new File(nom+".png");
