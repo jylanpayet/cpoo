@@ -1,9 +1,5 @@
 package FractalProject.modele;
-
 import org.apache.commons.math3.complex.Complex;
-
-import javafx.scene.image.Image;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -95,6 +91,18 @@ public class Julia {
         return ite;
     }
 
+    int divergenceIndexM(Complex z0){
+        int ite = 0;
+        Complex zm = new Complex(0,0);
+        Complex zn = z0;
+        while (ite < maxIt - 1 && zm.abs() <= radius) {
+            zm = zn.pow(2);
+            zm = zm.add(zn);
+            ite++;
+        }
+        return ite;
+    }
+
     int color(int div) {
         if(div==this.maxIt) {
             return (0 << 16) + (0 << 8) + 0;
@@ -110,7 +118,7 @@ public class Julia {
         var image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                image.setRGB(j, i, color(divergenceIndex(new Complex(realPart, imaginaryPart))));
+                image.setRGB(j, i, color(divergenceIndexM(new Complex(realPart, imaginaryPart))));
                 realPart += step;
             }
             realPart = xMin;
