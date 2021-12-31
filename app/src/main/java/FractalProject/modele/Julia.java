@@ -112,7 +112,7 @@ public class Julia {
         return Color.HSBtoRGB((float) div/ maxIt, 0.7f, 0.7f);
     }
 
-    public void drawFractal(String nom) throws IOException {
+    public BufferedImage drawFractal() {
         int width = (int) ((Math.abs(xMax - xMin)) / this.step) + 1;
         int height = (int) ((Math.abs(yMax - yMin)) / this.step) + 1;
         var image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -122,8 +122,10 @@ public class Julia {
                 image.setRGB(i, j, color(divTab[i][j]));
             }
         }
+        return image;
+    }
+    public static void createFile(String nom,BufferedImage image) throws IOException {
         File file = new File(nom+".png");
         ImageIO.write(image, "PNG", file);
     }
-
 }
